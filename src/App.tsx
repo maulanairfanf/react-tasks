@@ -1,37 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { Button } from '@mui/material';
+// src/App.tsx
 
-function App() {
-  const [count, setCount] = useState(0)
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import PrivateRoute from './components/PrivateRoute';
+import PublicRoute from './components/PublicRoute';
+import LoginPage from './pages/LoginPage';
+import HomePage from './pages/HomePage';
+import { AuthProvider } from './layouts/MiddlewareLayout';
 
+const App = () => {
+  const publicRoutes = [
+    { path: '/login', component: <LoginPage /> },
+  ];
+
+  const privateRoutes = [
+    { path: '/', component: <HomePage /> },
+  ];
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React + + Typescript + MUI 5</h1>
+    <Router>
+      <AuthProvider>
+      <Routes>
+      {publicRoutes.map((route, index) => (
+          <Route key={index} path={route.path} element={<PublicRoute />}>
+            <Route path={route.path} element={route.component} />
+          </Route>
+        ))}
+        {privateRoutes.map((route, index) => (
+          <Route key={index} path={route.path} element={<PrivateRoute />}>
+            <Route path={route.path} element={route.component} />
+          </Route>
+        ))}
+      </Routes>
+      </AuthProvider>
+    </Router>
+  );
+};
 
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
-
-export default App
+export default App;
