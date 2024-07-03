@@ -1,18 +1,13 @@
 
+import { Container } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 
-const DefaultLayout = () => {
+const AuthLayout = () => {
   return (
-    <div>
-      <header>
-        <h1>Default Layout</h1>
-        {/* Add your navigation here */}
-      </header>
-      <main>
-        <Outlet />
-      </main>
-    </div>
+    <Container sx={{ display: 'flex', alignItems: "center", justifyContent: 'center', minHeight: '100vh' }}>
+      <Outlet />
+    </Container>
   );
 };
 
-export default DefaultLayout;
+export default AuthLayout;

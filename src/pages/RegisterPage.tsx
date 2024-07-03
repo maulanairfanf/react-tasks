@@ -1,21 +1,20 @@
 
-import { Box, Stack, Typography } from '@mui/material';
-import LoginForm from '../components/auth/LoginForm';
-import Link from '@mui/material/Link';
+import { Box, Stack, Typography,Link } from '@mui/material';
+import RegisterForm from '../components/auth/RegisterForm';
 import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
   const navigate = useNavigate()
-  function handleRedirectRegister() {
-    navigate('/register');
+  function handleRedirectLogin() {
+    navigate('/login');
   }
   return (
     <Box 
       width={400}>
       <Typography  variant="h5" align="center" sx={{ marginBottom: "30px", color:"#fff" }}>
-        Login To Check Your Tasks
+        Register To Make Your Tasks
       </Typography>
-      <LoginForm />
+      <RegisterForm />
       <Stack 
         direction="row"
         justifyContent="flex-end"
@@ -26,15 +25,15 @@ const LoginPage = () => {
         <Typography
           variant="body2"
           >
-          don't have an account ?   
+          have an account ?   
         </Typography>
         <Link 
           variant="body2"
           color="secondary"
           component="button"
           onClick={() => {
-            handleRedirectRegister()
-          }}>Register</Link>
+            handleRedirectLogin()
+          }}>Login</Link>
         </Stack>
     </Box>
   );
